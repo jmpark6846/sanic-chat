@@ -60,7 +60,7 @@ class ChatApp extends Component {
 
   setupSocket(channel) {
 
-    const room_name = this.props.match.params.name
+    const room_name = this.props.match.params.name;
       const url = `ws://127.0.0.1:8000/${room_name}`;
     this.socket = new WebSocket(url);
     this.socket.onopen = (event) => {
@@ -113,6 +113,7 @@ class App extends Component{
     render(){
         return (
         <Router>
+            <Route exact path={'/'} component={ChatApp} />
             <Route path={'/:name'} component={ChatApp} />
         </Router>
     )
