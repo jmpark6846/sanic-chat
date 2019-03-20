@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {ChatWindow} from './react-chat-window/src';
-
-class App extends Component {
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+class ChatApp extends Component {
   constructor() {
     super();
     this.state = {
@@ -59,7 +59,9 @@ class App extends Component {
   }
 
   setupSocket(channel) {
-    const url = "ws://127.0.0.1:8000";
+
+    const room_name = this.props.match.params.name
+      const url = `ws://127.0.0.1:8000/${room_name}`;
     this.socket = new WebSocket(url);
     this.socket.onopen = (event) => {
         console.log(`Socket is connected to "${url}"`)
@@ -72,7 +74,7 @@ class App extends Component {
       } else {
           this.setState({
               messageList: [...this.state.messageList, data]
-          })
+      })
       }
     }
   }
@@ -107,4 +109,14 @@ class App extends Component {
   }
 }
 
+class App extends Component{
+    render(){
+        return (
+        <Router>
+            <Route path={'/:name'} component={ChatApp} />
+        </Router>
+    )
+    }
+
+}
 export default App;
