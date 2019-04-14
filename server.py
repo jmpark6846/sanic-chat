@@ -2,10 +2,8 @@ from asyncio import transports
 from typing import Optional
 
 from sanic import Sanic
-import asyncio
-from sanic.response import json
 from sanic.websocket import WebSocketProtocol
-from websockets import ConnectionClosed, WebSocketCommonProtocol
+from websockets import ConnectionClosed
 
 app = Sanic()
 
